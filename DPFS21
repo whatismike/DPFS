@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>DPFS</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <style>
+  /*  SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF TWO  */
+.span_2_of_2 {
+	width: 100%;
+  margin:auto;
+
+}
+.span_1_of_2 {
+	width: 49.2%;
+  margin: auto;
+
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 830px) {
+	.col {
+		margin: 1% 0 1% 0%;
+	}
+}
+
+@media only screen and (max-width: 830px) {
+	.span_2_of_2, .span_1_of_2 { width: 100%; }
+}
+
+
+body{
+      font-family: helvetica;
+      background-color: #4d4d4d;
+    }
+    .tableHead{
+      font-size:20px;
+      text-align: left;
+      font-weight:bold;
+      color:white;
+      padding-bottom:10px;
+      text-shadow: 5px 5px 5px #333333;
+    }
+    button{
+      width: 110px;
+      font-size: 10px;
+    }
+
+    label{
+      float:left;
+      clear:left;
+    }
+
+    input{
+      float: right;
+      clear: right;
+    }
+    .inputForm{
+      display: none;
+      background-color: #e6e6e6;
+      border-radius:5px;
+  box-shadow: 10px 10px 5px #333333;
+      border:6px solid navy;
+      padding: 20 px;
+      width:380px;
+      font-size: 14px;
+      text-area: 150px;
+      line-height:22px;
+    }
+.boxer {
+   display: block;
+  border:6px solid navy;
+   border-collapse: collapse;
+  width: 380px;
+  border-radius:5px;
+  box-shadow: 10px 10px 5px #333333;
+}
+
+.box-row {
+   display: table-row;
+
+}
+
+.box {
+   display: table-cell;
+   text-align: left;
+  padding-left:5px;
+   vertical-align: middle;
+   border: 1px solid grey;
+  height:20px;
+  background-color:#e6e6e6;
+  font-size:12px;
+
+}
+
+  </style>
+</head>
+<body>
+  <div id="navbuttons" class="section group">
+	<button id=BfinAssets>Fin Assets</button>
+  <button id=BretAssets>Ret Assets</button>
+  <button id=Boptions>Options</button>
+  <button id=BrealEstate>Real Estate</button>
+  <button id=BotherPersonal>Other/Personal</button>
+	<button id=BdebtAll>Debt - All</button>
+  <button id=BfamFound>Family Found.</button>
+  <button id=Btrusts>Trusts</button>
+  <button id=BannNWGrowth>Ann. NW Growth</button>
+	</div>
+</div>
+
+<div class="section group">
+	<div class="col span_1_of_2">
+	<div id='financialAssets' class='inputForm'>
+  <fieldset>
+    <legend><strong>FINANCIAL ASSETS</strong></legend>
+    <form>
+      <span><strong>Cash:</strong></span><br><br>
+
+      <label for=''>Morgan Stanley:</label> <input type='number' id=''><br>
+     <label for=''>Other - Outside CD:</label> <input type='number' id=''><br> <label for=''>Other - Banking:</label> <input type='number' id=''><br> <label for=''>Other-ETrade:</label> <input type='number' id=''><br> <br>
+      <span><strong>Bonds / Fixed Inc. :</strong></span><br><br><label for=''>Morgan Stanley:</label> <input type='number' id=''><br> <label for=''>Other:</label> <input type='number' id=''><br> <label for=''>Other:</label> <input type='number' id=''><br>
+<label for=''>Other:</label> <input type='number' id=''><br><br><span><strong>Stocks /Diversified :</strong></span><br><br><label for=''>Morgan Stanley AAA(s):</label> <input type='number' id=''><br><label for=''>Morgan Stanley - Inst. Mngd - CP:</label> <input type='number' id=''><br><label for=''>Mainstay Mutual Funds:</label> <input type='number' id=''><br><label for=''>Other:</label> <input type='number' id=''><br><span><strong>Stocks / Concentrated:</strong></span><br><br>
+
+      <label for=''>Held at Morgan Stanley:</label> <input type='number' id=''><br>
+     <label for=''>Any other location:</label> <input type='number' id=''><br><br>
+      <span><strong>Stocks / Restricted: </strong></span><br><br><label for=''> Held at Morgan Stanley:</label> <input type='number' id=''><br><label for=''>Any other location:</label> <input type='number' id=''> <br><br>
+      <span><strong>Alternative Investments :</strong></span><br><br><label for=''>Morgan Stanley AAA(s):</label> <input type='number' id=''><br><label for=''>Morgan Stanley - Inst. Mngd - CP:</label> <input type='number' id=''><br><label for=''>Mainstay Mutual Funds:</label> <input type='number' id=''><br><label for=''>Other:</label> <input type='number' id=''><br><br>
+
+      <span><strong>Education Assets :</strong></span><br><br><label for=''>Child 1:</label> <input type='number' id=''><br><label for=''>Child 2:</label> <input type='number' id=''><br><label for=''>Child 3:</label> <input type='number' id=''><br><label for=''>Other:</label> <input type='number' id=''><br><br>
+      <span><strong>Life Insurance :</strong></span><br><br><label for=''>Policy 1:</label> <input type='number' id=''><br><label for=''>Policy 2:</label> <input type='number' id=''><br><label for=''>Policy 3:</label> <input type='number' id=''><br><label for=''>Policy 4:</label> <input type='number' id=''><br><br>
+      <span><strong>Overseas Investments :</strong></span><br><br><label for=''>Pension(s):</label> <input type='number' id=''><br><label for=''>Stocks: </label> <input type='number' id=''><br><label for=''>Other:</label> <input type='number' id=''><br><label for=''>
+    </form>
+   </fieldset>
+  </div>
+
+	</div>
+
+
+	</div>
+</div>
+<br>
+<div class="section group">
+	<div class="col span_1_of_2">
+	<div class='tableHead'>PERSONAL ASSETS</div>
+      <div class="boxer">
+	<div class="box-row">
+      <div class="box" style="text-decoration: underline; font-size: 16px;"><strong>Financial Assets</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Cash</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Bonds - Fixed Income</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Stocks - Diversified</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box">Stocks -<strong> Concentrated</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box">Stocks -<strong> Restricted</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Options -</strong> Vested (after tax)</div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong> Alternative Investments</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box">Retirement -<strong> IRAs</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box">Retirement -<strong> 401k/PS/Keogh</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box">Retirement -<strong> Annuities</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+      <div class="box">Deferred -<strong> Compensation</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Education Assets</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Life Insurance -</strong> Cash Value</div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Overseas Investments</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+
+</div>
+      <br>
+<div class="boxer">
+	<div class="box-row">
+      <div class="box" style="text-decoration: underline; font-size: 16px;"><strong>Real Estate</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Personal Residence(s)</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Rental Prop. -  Residential</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box">Rental Prop. -  <strong>Commercial</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Raw Land</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Under Development</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Overseas Property</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+</div>
+      <br>
+<div class="boxer">
+	<div class="box-row">
+		<div class="box" style="text-decoration: underline; font-size: 16px;"><strong>Other Assets</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Primary Business</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Other Private Business</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Note(s) Receivable</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+</div>
+<br>
+<div class="boxer">
+	<div class="box-row">
+		<div class="box" style="text-decoration: underline; font-size: 16px;"><strong>Personal Property</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+  <div class="box-row">
+		<div class="box"><strong>Auto(s)/Plane(s)/Boat(s)</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Collections / Jewelry</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Res. Replacement Value</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+  <div class="box-row">
+		<div class="box"><strong>All Other</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+</div>
+	</div>
+	<div class="col span_1_of_2">
+	<div class='tableHead'>PERSONAL LIABILITIES</div>
+      <div class="boxer">
+	<div class="box-row">
+      <div class="box" style="text-decoration: underline; font-size: 16px;"><strong>Personal Debt</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Credit Cards</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Sec. Based Loans / Margin</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Car / Boat/ Plane</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong> 401k Loans</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong> Insurance Based Loans</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Personal Line of Credit</strong> Vested (after tax)</div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong> Future Tax Liability</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+
+</div>
+      <br>
+<div class="boxer">
+	<div class="box-row">
+      <div class="box" style="text-decoration: underline; font-size: 16px;"><strong>Real Estate Debt</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Mortgage(s) - Personal</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box">Mortgage(s) - <strong>Rental</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"> <strong>Home Equity Loan(s)</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Commercial Prop. Loan(s)</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Land Loan(s)</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Development Loan(s)</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+</div>
+      <br>
+<div class="boxer">
+	<div class="box-row">
+		<div class="box" style="text-decoration: underline; font-size: 16px;"><strong>Other Debt</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box"><strong>Business-Outstanding LOC</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box">Business - <strong>Term Loans</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="box-row">
+		<div class="box">Business - <strong>Real Estate</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+  <div class="box-row">
+		<div class="box"><strong>Accrued Future Payments</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+  <div class="box-row">
+		<div class="box"><strong>Other</strong></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+</div>
+      <br><br>
+      <div class='tableHead'>PERSONAL NET WORTH:</div><br>
+      <div class='tableHead'>FAMILY FOUNDATION:</div><br>
+      <div class='tableHead'>IN TRUST FOR OTHERS:</div><br>
+<br>
+
+	</div>
+</div>
+
+
+
+
+
+
+	</div>
+  </div>
+
+
+
+</div>
+<script>
+  $('.box:odd').css('width','20px');
+  $('.box:even').css('width','170px');
+
+  $("#BfinAssets").click(function() {
+  $("#financialAssets").slideToggle();
+});
+  </script>
+</body>
+</html>
